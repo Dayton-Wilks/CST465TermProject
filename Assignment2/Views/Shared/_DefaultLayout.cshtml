@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>@ViewBag.Title</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <link href="@Url.Content("~/css/Default.css")" rel="stylesheet" type="text/css" />
+    </head>
+
+    <body>
+     
+        <div class="container">
+            <nav class="navbar navbar-expand-sm myNavColor">
+
+                <a href="@Url.Action("Index", "Home")" class="nav-brand col-1">
+                    <img src="~/LinkImage.png" alt="LinkImage" height="20" width="20" />
+                </a>
+
+                <ul class="navbar-nav col-md-4">
+                    <li class="nav-item card linkcard @(ViewContext.RouteData.Values["Controller"].ToString() == "Home" ? "active" : "")">
+                        @Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-link" })
+                    </li>
+                    <li class="nav-item card linkcard @(ViewContext.RouteData.Values["Controller"].ToString() == "Contact" ? "active" : "")">
+                        @Html.ActionLink("Contact", "Index", "Contact", null, new { @class = "nav-link" })
+                    </li>
+                    <li class="nav-item card linkcard @(ViewContext.RouteData.Values["Controller"].ToString() == "About" ? "active" : "")">
+                        @Html.ActionLink("About", "Index", "About", null, new { @class = "nav-link" })
+                    </li>
+                </ul>
+                <div class="col-sm-7"></div>
+
+            </nav>
+        </div>
+
+        <div class="container card">
+            @RenderBody()
+        </div>
+        
+    </body>
+</html>
+
+

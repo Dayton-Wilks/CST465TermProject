@@ -1,0 +1,28 @@
+﻿@model BasicInfoModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Leave your Contact Information</h2>
+
+@using (Html.BeginForm(FormMethod.Post, "ContactController"))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.Name, new { @class = "control-label" })
+        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.PhoneNumber, new { @class = "control-label" })
+        @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Email, new { @class = "control-label" })
+        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Message, new { @class = "control-label" })
+        @Html.TextBoxFor(m => m.Message, new { @class = "form-control" })
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+}
+
