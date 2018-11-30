@@ -1,0 +1,16 @@
+﻿@model PostPageModel
+@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="container">
+    <h2>Home Page</h2>
+    @foreach (PostModel x in Model.posts)
+    {
+        <partial name="_DisplayPostPartial" for="@x" />
+    }
+    <partial name="_PageSelectorPartial" for="@Model" />
+</div>
+
+
+

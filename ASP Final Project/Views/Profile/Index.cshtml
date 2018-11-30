@@ -1,0 +1,8 @@
+﻿@model SanitizedUserModel
+@{
+    ViewData["Title"] = Model.UserName;
+}
+
+<h2>User Profile</h2>
+<partial name="_DisplayUserPartial" for="@Model" />
+

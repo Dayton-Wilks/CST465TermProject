@@ -1,0 +1,9 @@
+﻿@model TumblrUserModel
+@{
+    ViewData["Title"] = "My Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>My Profile</h2>
+<partial name="_EditUserPartial" for="@Model" />
+

@@ -1,0 +1,27 @@
+Z:\ASP Final Project\bin\Debug\netcoreapp2.1\ASP Final Project.deps.json
+Z:\ASP Final Project\bin\Debug\netcoreapp2.1\ASP Final Project.runtimeconfig.json
+Z:\ASP Final Project\bin\Debug\netcoreapp2.1\ASP Final Project.runtimeconfig.dev.json
+Z:\ASP Final Project\bin\Debug\netcoreapp2.1\ASP Final Project.dll
+Z:\ASP Final Project\obj\Debug\netcoreapp2.1\ASP Final Project.csprojAssemblyReference.cache
+Z:\ASP Final Project\obj\Debug\netcoreapp2.1\ASP Final Project.csproj.CoreCompileInputs.cache
+Z:\ASP Final Project\obj\Debug\netcoreapp2.1\ASP Final Project.RazorAssemblyInfo.cache
+Z:\ASP Final Project\obj\Debug\netcoreapp2.1\ASP Final Project.RazorAssemblyInfo.cs
+Z:\ASP Final Project\obj\Debug\netcoreapp2.1\ASP Final Project.AssemblyInfoInputs.cache
+Z:\ASP Final Project\obj\Debug\netcoreapp2.1\ASP Final Project.AssemblyInfo.cs
+Z:\ASP Final Project\obj\Debug\netcoreapp2.1\ASP Final Project.TagHelpers.input.cache
+Z:\ASP Final Project\obj\Debug\netcoreapp2.1\ASP Final Project.TagHelpers.output.cache
+Z:\ASP Final Project\obj\Debug\netcoreapp2.1\ASP Final Project.RazorCoreGenerate.cache
+Z:\ASP Final Project\obj\Debug\netcoreapp2.1\Razor\Views\Shared\_Layout.g.cshtml.cs
+Z:\ASP Final Project\obj\Debug\netcoreapp2.1\Razor\Views\_ViewImports.g.cshtml.cs
+Z:\ASP Final Project\obj\Debug\netcoreapp2.1\Razor\Views\_ViewStart.g.cshtml.cs
+Z:\ASP Final Project\obj\Debug\netcoreapp2.1\ASP Final Project.RazorTargetAssemblyInfo.cache
+Z:\ASP Final Project\obj\Debug\netcoreapp2.1\ASP Final Project.RazorTargetAssemblyInfo.cs
+Z:\ASP Final Project\bin\Debug\netcoreapp2.1\ASP Final Project.pdb
+Z:\ASP Final Project\bin\Debug\netcoreapp2.1\ASP Final Project.Views.dll
+Z:\ASP Final Project\bin\Debug\netcoreapp2.1\ASP Final Project.Views.pdb
+Z:\ASP Final Project\obj\Debug\netcoreapp2.1\ASP Final Project.Views.pdb
+Z:\ASP Final Project\obj\Debug\netcoreapp2.1\ASP Final Project.dll
+Z:\ASP Final Project\obj\Debug\netcoreapp2.1\ASP Final Project.pdb
+Z:\ASP Final Project\obj\Debug\netcoreapp2.1\ASP Final Project.csproj.CopyComplete
+Z:\ASP Final Project\obj\Debug\netcoreapp2.1\Razor\Views\Home\Index.g.cshtml.cs
+Z:\ASP Final Project\obj\Debug\netcoreapp2.1\Razor\Views\Admin\Index.g.cshtml.cs
