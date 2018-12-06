@@ -10,9 +10,9 @@ namespace TumblrRipOff.Repositories
     {
         PostModel GetPost(int PostId);
 
-        List<PostModel> GetPosts(int index, string UserName = ""); // retrive 20 at a time?
+        List<PostModel> GetPosts(string UserName = ""); // retrive 20 at a time?
 
-        int GetPostCount(string userName);
+        //int GetPostCount(string userName);
 
         void DeletePost(int PostID);
 

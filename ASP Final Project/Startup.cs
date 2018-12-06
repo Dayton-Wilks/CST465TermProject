@@ -27,7 +27,7 @@ namespace TumblrRipOff
             services.AddMvc();
 
             services.Configure<TumblrConfiguration>(_Configuration);
-            services.AddTransient<IPostRepository, PostRepository>();
+            services.AddTransient<IPostRepository, CachePostRepository>();
             //services.AddTransient<IPostRepository, CachePostRepository>();
         }
 
@@ -37,6 +37,10 @@ namespace TumblrRipOff
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+            }
+            else
+            {
+                app.UseExceptionHandler("/Home/Error");
             }
 
             app.UseStaticFiles();

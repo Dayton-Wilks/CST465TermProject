@@ -9,10 +9,11 @@ using TumblrRipOff.Models;
 
 namespace TumblrRipOff.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin,")]
     public class AdminController : Controller
     {
-        private RoleManager<Microsoft.AspNetCore.Identity.IdentityRole> _RoleManager;
+        private RoleManager<IdentityRole> _RoleManager;
         private UserManager<TumblrUserModel> _UserManager;
 
         public AdminController(RoleManager<IdentityRole> roleManager, UserManager<TumblrUserModel> userManager)
@@ -23,27 +24,6 @@ namespace TumblrRipOff.Controllers
 
         [Route("Admin")]
         public IActionResult Index() // displays list of users
-        {
-            return View();
-        }
-
-        [HttpGet]
-        [Route("Admin/{userName?}")]
-        public IActionResult GetUser(string userName)
-        {
-            return View();
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult BanUser(string UserEmail, DateTime banTime)
-        {
-            return View();
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult DeletePost(int PostId)
         {
             return View();
         }

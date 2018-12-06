@@ -5452,7 +5452,7 @@
       ]
     },
     "Microsoft.AspNetCore.Razor.Design/2.1.2": {
-      "sha512": "ab4+TZw3Sxqrr5TwrwVyABeQkhSxYMJXgG6yZw7T+r6Vz+hcOt+pK79o15ESG7kZvWAK9wRG7emnTIia5O6R1Q==",
+      "sha512": "sa/cztXesLyTgCiYuef0RK2EAImnak0w2wrjCh/YBTvbn4iV2eTy0q3F8CyUkGiaYEyxUKGVTko6+7SMRBL4Gg==",
       "type": "package",
       "path": "microsoft.aspnetcore.razor.design/2.1.2",
       "files": [
@@ -12219,23 +12219,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\dayton.wilks\\.nuget\\packages\\": {},
+    "C:\\Users\\Dayton Wilks\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "Z:\\ASP Final Project\\TumblrRipOff.csproj",
+      "projectUniqueName": "G:\\Documents\\School\\ASP GIT\\CST465TermProject\\ASP Final Project\\TumblrRipOff.csproj",
       "projectName": "TumblrRipOff",
-      "projectPath": "Z:\\ASP Final Project\\TumblrRipOff.csproj",
-      "packagesPath": "C:\\Users\\dayton.wilks\\.nuget\\packages\\",
-      "outputPath": "Z:\\ASP Final Project\\obj\\",
+      "projectPath": "G:\\Documents\\School\\ASP GIT\\CST465TermProject\\ASP Final Project\\TumblrRipOff.csproj",
+      "packagesPath": "C:\\Users\\Dayton Wilks\\.nuget\\packages\\",
+      "outputPath": "G:\\Documents\\School\\ASP GIT\\CST465TermProject\\ASP Final Project\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\dayton.wilks\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Dayton Wilks\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

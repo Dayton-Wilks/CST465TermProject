@@ -6,21 +6,24 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using TumblrRipOff.Models;
+using Microsoft.Extensions.Configuration;
 
 namespace TumblrRipOff.Repositories
 {
     public class PostRepository : IPostRepository
     {
-        private TumblrConfiguration _Configuration;
+        private TumblrConfiguration _SnapShotData;
+        private IConfiguration _Config;
 
-        public PostRepository(IOptionsSnapshot<TumblrConfiguration> configuration)
+        public PostRepository(IOptionsSnapshot<TumblrConfiguration> snap, IConfiguration config)
         {
-            _Configuration = configuration.Value;
+            _SnapShotData = snap.Value;
+            _Config = config;
         }
 
         public virtual void DeletePost(int PostID)
         {
-            using (SqlConnection connection = new SqlConnection())
+            using (SqlConnection connection = new SqlConnection(GetConnection()))
             {
                 using (SqlCommand command = new SqlCommand("DeletePost", connection))
                 {
@@ -36,7 +39,7 @@ namespace TumblrRipOff.Repositories
         public virtual PostModel GetPost(int PostId)
         {
             PostModel post = null;
-            using (SqlConnection connection = new SqlConnection())
+            using (SqlConnection connection = new SqlConnection(GetConnection()))
             {
                 using (SqlCommand command = new SqlCommand("GetPost", connection))
                 {
@@ -56,41 +59,39 @@ namespace TumblrRipOff.Repositories
             return post;
         }
 
-        public virtual int GetPostCount(string userName)
+        //public virtual int GetPostCount(string userName)
+        //{
+        //    int count = -1;
+        //    using (SqlConnection connection = new SqlConnection(GetConnection()))
+        //    {
+        //        using (SqlCommand command = new SqlCommand("GetPostCount", connection))
+        //        {
+        //            command.CommandType = CommandType.StoredProcedure;
+        //            command.Parameters.AddWithValue("@UserName", userName);
+
+        //            connection.Open();
+        //            using (SqlDataReader reader = command.ExecuteReader())
+        //            {
+        //                if (reader.Read())
+        //                {
+        //                    count = (int)reader["Count"];
+        //                }
+        //            }
+        //        }
+        //    }
+        //    return count;
+        //}
+
+        public virtual List<PostModel> GetPosts(string UserName = "")
         {
-            int count = -1;
-            using (SqlConnection connection = new SqlConnection())
+            List<PostModel> page = new List<PostModel>();
+            using (SqlConnection connection = new SqlConnection(GetConnection()))
             {
-                using (SqlCommand command = new SqlCommand("GetPostCount", connection))
+                bool check = (UserName == null || UserName == "");
+                using (SqlCommand command = new SqlCommand((check) ? "GetPosts" : "GetPostsByName", connection))
                 {
                     command.CommandType = CommandType.StoredProcedure;
-                    command.Parameters.AddWithValue("@UserName", userName);
-
-                    connection.Open();
-                    using (SqlDataReader reader = command.ExecuteReader())
-                    {
-                        if (reader.Read())
-                        {
-                            count = (int)reader["Count"];
-                        }
-                    }
-                }
-            }
-            return count;
-        }
-
-        public virtual List<PostModel> GetPosts(int index, string UserName = "")
-        {
-            List<PostModel> page = null;
-            using (SqlConnection connection = new SqlConnection())
-            {
-                using (SqlCommand command = new SqlCommand("GetPosts", connection))
-                {
-                    int rowStart = index * _Configuration.PageSize;
-                    command.CommandType = CommandType.StoredProcedure;
-                    command.Parameters.AddWithValue("@RowStart", rowStart);
-                    command.Parameters.AddWithValue("@UserName", UserName);
-                    command.Parameters.AddWithValue("@RowCount", rowStart + _Configuration.PageSize);
+                    if (!check) command.Parameters.AddWithValue("@Creator", UserName);
 
                     connection.Open();
                     using (SqlDataReader reader = command.ExecuteReader())
@@ -107,17 +108,15 @@ namespace TumblrRipOff.Repositories
 
         public virtual void SavePost(PostModel model)
         {
-            using (SqlConnection connection = new SqlConnection())
+            using (SqlConnection connection = new SqlConnection(GetConnection()))
             {
-                using (SqlCommand command = new SqlCommand("SavePost", connection))
+                using (SqlCommand command = new SqlCommand("InsertPost", connection))
                 {
                     command.CommandType = CommandType.StoredProcedure;
-                    command.Parameters.AddWithValue("@ID", model.PostID);
                     command.Parameters.AddWithValue("@Title", model.Title);
                     command.Parameters.AddWithValue("@ImageUrl", model.ImageUrl);
                     command.Parameters.AddWithValue("@PostText", model.PostText);
                     command.Parameters.AddWithValue("@Creator", model.Creator);
-                    command.Parameters.AddWithValue("@ID", model.PostID);
 
                     connection.Open();
                     command.ExecuteNonQuery();
@@ -129,14 +128,19 @@ namespace TumblrRipOff.Repositories
         {
             PostModel post = new PostModel();
 
-            post.PostID = (int)reader["ID"];
+            post.PostID = (int)reader["PostID"];
             post.Title = reader["Title"].ToString();
-            post.ImageUrl = reader["ImageUrl"].ToString();
+            post.ImageUrl = reader["ImageURL"].ToString();
             post.PostText = reader["PostText"].ToString();
             post.Creator = reader["Creator"].ToString();
             post.TimeStamp = (DateTime)reader["Timestamp"];
 
             return post;
+        }
+
+        private string GetConnection()
+        {
+            return _Config.GetConnectionString("Lab8ContextConnection");
         }
     }
 }

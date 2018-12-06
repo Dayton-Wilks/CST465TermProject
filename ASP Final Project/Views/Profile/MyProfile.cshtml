@@ -1,9 +1,12 @@
-﻿@model TumblrUserModel
+﻿@inject RoleManager<IdentityRole> RoleMan
+@inject UserManager<TumblrUserModel> UserMan
+
+@model UpdateModel
 @{
     ViewData["Title"] = "My Profile";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>My Profile</h2>
-<partial name="_EditUserPartial" for="@Model" />
+<partial name="/Views/Shared/EditorPartials/_EditUserPartial.cshtml" for="@Model" />
 

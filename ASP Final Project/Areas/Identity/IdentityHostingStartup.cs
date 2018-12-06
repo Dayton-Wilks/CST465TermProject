@@ -17,7 +17,7 @@ namespace TumblrRipOff.Areas.Identity
             builder.ConfigureServices((context, services) => {
                 services.AddDbContext<TumblrRipOffContext>(options =>
                     options.UseSqlServer(
-                        context.Configuration.GetConnectionString("TumblrRipOffContextConnection")));
+                        context.Configuration.GetConnectionString("Lab8ContextConnection")));
 
                 //services.AddDefaultIdentity<TumblrUserModel>()
                 //    .AddEntityFrameworkStores<TumblrRipOffContext>();

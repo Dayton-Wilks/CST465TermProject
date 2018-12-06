@@ -7,7 +7,8 @@ namespace TumblrRipOff
 {
     public class TumblrConfiguration
     {
-        public int PageSize { get; set; }
-        public int DefaultImageID { get; set; }
+        public string DefaultTitle { get; set; }
+        public string DefaultImageURL { get; set; }
+        public string DefaultText { get; set; }
     }
 }

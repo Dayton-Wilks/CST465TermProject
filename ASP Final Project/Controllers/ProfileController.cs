@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using TumblrRipOff.Models;
 using TumblrRipOff.Repositories;
 using TumblrRipOff.Utilities;
@@ -17,46 +18,63 @@ namespace TumblrRipOff.Controllers
         private RoleManager<IdentityRole> _RoleManager;
         private UserManager<TumblrUserModel> _UserManager;
         private IPostRepository _postRepository;
+        private IOptionsSnapshot<TumblrConfiguration> _configuration;
 
-        public ProfileController(RoleManager<IdentityRole> roleManager, UserManager<TumblrUserModel> userManager, IPostRepository postRepository)
+        public ProfileController(RoleManager<IdentityRole> roleManager, UserManager<TumblrUserModel> userManager, IPostRepository postRepository, IOptionsSnapshot<TumblrConfiguration> configuration)
         {
             _RoleManager = roleManager;
             _UserManager = userManager;
             _postRepository = postRepository;
+            _configuration = configuration;
         }
 
         [AllowAnonymous]
-        [Route("Profile")]
-        [Route("Profile/{UserName?}")]
+        [Route("ProfileFeed")]
+        [Route("ProfileFeed/{UserName?}")]
         [HttpGet]
         public IActionResult Index(string UserName) // shows user feed
         {
-            var user = _UserManager.FindByNameAsync(UserName).Result;
-            if (user == null)
+            TumblrUserModel user;
+            if (UserName == null || (user = _UserManager.FindByNameAsync(UserName).Result) == null)
             {
                 return View("ErrorPage", new ErrorModel() { ErrorMessage = "This user could not be found!"});
             }
-            SanitizedUserModel model = Utility.Convert(user, _postRepository.GetPostCount(UserName));
+            //SanitizedUserModel model = Utility.Convert(user, _postRepository.GetPostCount(UserName));
+            //SanitizedUserModel model = Utility.Convert(user, 0);
+            List<PostModel> model = _postRepository.GetPosts(UserName);
             return View(model);
         }
 
         [HttpGet]
         public IActionResult MyProfile()
         {
-            return View("MyProfile");
+            TumblrUserModel t = _UserManager.GetUserAsync(User).Result;
+            UpdateModel model = new UpdateModel() { UserName = t.UserName, Email = t.Email, AboutMe = t.AboutMe , ProfileImageUrl = t.ProfileImageUrl};
+            return View("MyProfile", model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult MyProfile(TumblrUserModel model)
+        public IActionResult MyProfile(UpdateModel model)
         {
-            return View();
+            if (!ModelState.IsValid)
+            {
+                return View("MyProfile", model);
+            }
+            var user = _UserManager.GetUserAsync(User).Result;
+
+            user.AboutMe = model.AboutMe;
+            user.ProfileImageUrl = model.ProfileImageUrl;
+            var x =_UserManager.UpdateAsync(user).Result;
+
+            return RedirectToAction("MyProfile");
         }
 
         [HttpGet]
         public IActionResult CreatePost()
         {
-            return View("CreatePost", new PostModel());
+            TumblrConfiguration c = _configuration.Value;
+            return View("CreatePost", new PostModel() { Title = c.DefaultTitle, ImageUrl = c.DefaultImageURL, PostText = c.DefaultText});
         }
 
         [HttpPost]
@@ -67,7 +85,10 @@ namespace TumblrRipOff.Controllers
             {
                 return View("CreatePost", model);
             }
-            return RedirectToAction();
+            model.Creator = User.Identity.Name;
+            
+            _postRepository.SavePost(model);
+            return RedirectToAction("CreatePost");
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
@@ -13,10 +14,11 @@ namespace TumblrRipOff.Repositories
         private IMemoryCache _Cache;
         private string _CachePrefix = "CachePostKey_";
 
-        public CachePostRepository(IOptionsSnapshot<TumblrConfiguration> configuration, IMemoryCache cache) : base(configuration)
+        public CachePostRepository(IOptionsSnapshot<TumblrConfiguration> configuration, IConfiguration config, IMemoryCache cache) : base(configuration, config)
         {
             _Cache = cache;
         }
+
         public override void DeletePost(int PostID)
         {
             base.DeletePost(PostID);
@@ -27,19 +29,23 @@ namespace TumblrRipOff.Repositories
             return base.GetPost(PostId);
         }
 
-        public override int GetPostCount(string userName)
+        public override List<PostModel> GetPosts(string UserName = "")
         {
-            return base.GetPostCount(userName);
-        }
+            if ((UserName != null && UserName != "")) return base.GetPosts(UserName);
 
-        public override List<PostModel> GetPosts(int index, string UserName = "")
-        {
-            return base.GetPosts(index, UserName);
+            var postList = (List<PostModel>) _Cache.Get(_CachePrefix);
+            if (postList == null)
+            {
+                postList = base.GetPosts(UserName);
+                _Cache.Set(_CachePrefix, postList);
+            }
+            return postList;
         }
 
         public override void SavePost(PostModel model)
         {
             base.SavePost(model);
+            _Cache.Remove(_CachePrefix);
         }
     }
 }

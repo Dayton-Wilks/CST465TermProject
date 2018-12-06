@@ -1,4 +1,21 @@
-﻿@model SanitizedUserModel
+﻿@inject UserManager<TumblrUserModel> UserManager
+@model PostModel
 
-<h2>DisplayPostPartial</h2>
+<div class="card">
+    <div class="card-header">@Model.Title</div>
+    <div class="card-body">
+        <div class="text-center">
+            <img alt="@Model.PostID" src="@Model.ImageUrl" class="PostImage card-image-top" />
+        </div>
+    </div>
+    <div class="card-footer">
+        <div class="card-text">
+            <p>@Html.Raw(Model.PostText)</p>
+        </div>
+        <hr />
+        <small class="text-muted">
+            <span><img alt="Profile Image" src="@UserManager.FindByNameAsync(Model.Creator).Result.ProfileImageUrl" class="ProfileImage float-left" />    @Html.ActionLink(Model.Creator, "Index", "ProfileFeed", new { UserName = Model.Creator }, new { @class = "nav-link" })</span>  
+        </small>
+    </div>
+</div>
 

@@ -11,7 +11,7 @@ namespace TumblrRipOff.Models
         [Display(Name = "Post ID")]
         public int PostID { get; set; }
 
-        [Display(Name = "Post ID")]
+        [Display(Name = "Title")]
         [Required(ErrorMessage = "A post needs a title", AllowEmptyStrings = false)]
         public string Title { get; set; }
 
@@ -19,6 +19,7 @@ namespace TumblrRipOff.Models
         public string ImageUrl { get; set; } = "";
 
         [Display(Name = "Post Text")]
+        [DataType(DataType.MultilineText)]
         public string PostText { get; set; }
 
         [Display(Name = "Creator")]

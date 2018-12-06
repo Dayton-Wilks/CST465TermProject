@@ -23,23 +23,23 @@ namespace TumblrRipOff.Controllers
         }
 
         [HttpGet]
-        [Route("Home/{index?}")]
-        public IActionResult Index(int page = 1)
+        //[Route("Home")]
+        public IActionResult Index()
         {
-            List<PostModel> pageResults = _postRepository.GetPosts(page);
+            List<PostModel> pageResults = _postRepository.GetPosts();
             return View(pageResults);
         }
 
-        [HttpGet]
-        [Route("Home/DisplayPost/{postID?}")]
-        public IActionResult DisplayPost(int postID)
-        {
-            PostModel model = null;
-            if (postID == 0 || (model = _postRepository.GetPost(postID)) == null)
-            {
-                return View("ErrorPage", new ErrorModel() { ErrorMessage = "The post could not be found!" });
-            }
-            return View(model);
-        }
+        //[HttpGet]
+        //[Route("Home/DisplayPost/{postID?}")]
+        //public IActionResult DisplayPost(int postID)
+        //{
+        //    PostModel model = null;
+        //    if (postID == 0 || (model = _postRepository.GetPost(postID)) == null)
+        //    {
+        //        return View("ErrorPage", new ErrorModel() { ErrorMessage = "The post could not be found!" });
+        //    }
+        //    return View(model);
+        //}
     }
 }

@@ -1,0 +1,9 @@
+﻿.ProfileImage {
+    max-height: 40px;
+    max-width: 40px;
+}
+
+.PostImage {
+    max-height: 100%;
+    max-width: 100%;
+}

@@ -1,15 +1,18 @@
-﻿@model PostPageModel
+﻿@model List<PostModel>
 @{
     ViewData["Title"] = "Home";
 }
 
 <div class="container">
     <h2>Home Page</h2>
-    @foreach (PostModel x in Model.posts)
+    @foreach (PostModel x in Model)
     {
-        <partial name="_DisplayPostPartial" for="@x" />
+    <div class="container">
+        <partial name="/Views/Shared/DisplayPartials/_DisplayPostPartial.cshtml" for="@x" />
+    </div>
+    <br />
     }
-    <partial name="_PageSelectorPartial" for="@Model" />
+    @*<partial name="_PageSelectorPartial" for="@Model" />*@
 </div>
 
 

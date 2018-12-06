@@ -1,5 +1,0 @@
-﻿{
-  "ConnectionStrings": {
-    "Lab8ContextConnection": "Server=cst465.database.windows.net;Database=dayton.wilks;User ID=dayton.wilks;Password=CST465 5923!; Connection Timeout=300; Trusted_Connection=False; Encrypt=True;"
-  }
-}
